@@ -1,0 +1,1457 @@
+
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المنصة التعليمية المتطورة - الإصدار الشامل 2030</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e3c72;
+            --secondary: #2a5298;
+            --accent: #ffd700;
+            --light: #f8f9fa;
+            --dark: #1a1a2e;
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            --card-gradient: linear-gradient(135deg, #43cea2, #185a9d);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: var(--gradient);
+            color: white;
+            line-height: 1.6;
+            overflow-x: hidden;
+            background-attachment: fixed;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* أنماط الشريط العلوي */
+        .top-bar {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        .logo i {
+            color: var(--accent);
+            margin-left: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* أنماط الهيدر */
+        header {
+            text-align: center;
+            padding: 60px 0 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            pointer-events: none;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(to right, var(--accent), #ffffff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 25px;
+            opacity: 0.9;
+            line-height: 1.8;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 16px 40px;
+            background: var(--accent);
+            color: var(--primary) !important;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            margin-top: 15px;
+            transition: all 0.4s ease;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+            border: 2px solid transparent;
+        }
+
+        .cta-button:hover {
+            background: transparent;
+            color: var(--accent) !important;
+            border-color: var(--accent);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* شريط الأخبار */
+        .news-bar {
+            background: linear-gradient(90deg, #4b6cb7, #182848);
+            color: white;
+            padding: 18px;
+            display: flex;
+            align-items: center;
+            border-radius: 10px;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .news-label {
+            background: linear-gradient(90deg, #ff6b6b, #ff9966);
+            padding: 12px 25px;
+            font-weight: bold;
+            border-radius: 0 30px 30px 0;
+            margin-right: -10px;
+            z-index: 2;
+            box-shadow: 3px 0 15px rgba(0,0,0,0.3);
+            position: relative;
+            font-size: 1.2rem;
+        }
+
+        .news-container {
+            flex: 1;
+            overflow: hidden;
+            position: relative;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .news-ticker {
+            position: absolute;
+            white-space: nowrap;
+            animation: ticker 25s linear infinite;
+            font-size: 1.1rem;
+            padding-left: 20px;
+        }
+
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* آخر البرامج المضافة */
+        .programs-section {
+            margin: 60px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -17px;
+            left: 0;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+        }
+
+        .count-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .count-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .count-btn.active {
+            background: var(--accent);
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .programs-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .program-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .program-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .program-badge {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: linear-gradient(90deg, #ff6b6b, #ff9966);
+            color: white;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: bold;
+            font-size: 0.9rem;
+            z-index: 2;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .program-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .program-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(30, 60, 114, 0.7), rgba(42, 82, 152, 0.9));
+            opacity: 0.8;
+        }
+
+        .program-image i {
+            font-size: 5rem;
+            color: white;
+            z-index: 1;
+            opacity: 0.8;
+        }
+
+        .program-content {
+            padding: 25px;
+        }
+
+        .program-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            min-height: 70px;
+            display: flex;
+            align-items: center;
+            color: var(--accent);
+        }
+
+        .program-description {
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 25px;
+            line-height: 1.7;
+            min-height: 100px;
+        }
+
+        .program-link {
+            display: block;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .program-link:hover {
+            background: var(--accent);
+            color: var(--primary);
+            transform: translateY(-3px);
+        }
+
+        /* أنماط المحتوى الرئيسي */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 35px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .feature-card a {
+            color: inherit;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+
+        .feature-icon {
+            font-size: 3.5rem;
+            margin-bottom: 25px;
+            color: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        .feature-card p {
+            color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7;
+        }
+
+        /* أنماط الإحصائيات */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px 20px;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* أنماط الروابط */
+        .links-section {
+            margin: 60px 0;
+        }
+
+        .links-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .link-item {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .link-item:hover {
+            background: rgba(0, 0, 0, 0.3);
+            transform: translateY(-5px);
+        }
+
+        .link-item a {
+            color: var(--accent);
+            text-decoration: none;
+            display: block;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        .link-item a:hover {
+            color: white;
+            text-decoration: underline;
+        }
+
+        .link-item p {
+            color: rgba(255, 255, 255, 0.7);
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* أنماط الدعوة للعمل */
+        .invite-section {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .invite-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon points="0,0 100,100 0,100" fill="rgba(255,255,255,0.1)"/></svg>');
+            background-size: 100% 100%;
+            pointer-events: none;
+        }
+
+        .invite-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+
+        .invite-text {
+            color: rgba(0, 0, 0, 0.8);
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .invite-button {
+            display: inline-block;
+            background: var(--primary);
+            color: white !important;
+            padding: 15px 35px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.2);
+        }
+
+        .invite-button:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        /* قسم الفيديوهات */
+        .video-section {
+            margin: 60px 0;
+        }
+
+        .video-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+        }
+
+        .video-embed {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-embed iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .video-info {
+            padding: 20px;
+        }
+
+        .video-title {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            color: var(--accent);
+        }
+
+        /* قسم التحميل */
+        .download-section {
+            background: linear-gradient(135deg, #1d976c, #93f9b9);
+            padding: 50px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 60px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .download-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .download-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .download-btn {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: 2px solid white;
+        }
+
+        .download-btn:hover {
+            background: rgba(0, 0, 0, 0.5);
+            transform: translateY(-5px);
+        }
+
+        .download-btn i {
+            font-size: 1.5rem;
+        }
+
+        /* أنماط الفوتر */
+        footer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 40px 0;
+            margin-top: 60px;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 25px 0;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: rgba(255, 255, 255, 0.6);
+            margin-top: 20px;
+            font-size: 0.95rem;
+        }
+
+        /* أنماط متجاوبة */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .programs-container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.3rem;
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .controls {
+                align-self: flex-end;
+            }
+            
+            .news-ticker {
+                animation: ticker 15s linear infinite;
+            }
+            
+            .news-label {
+                padding: 10px 20px;
+                font-size: 1rem;
+            }
+            
+            .program-image {
+                height: 180px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-button {
+                padding: 14px 30px;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .controls {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .count-btn {
+                padding: 8px 15px;
+                font-size: 0.9rem;
+            }
+            
+            .programs-container {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* تأثيرات متحركة */
+        .floating {
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+    </style>
+</head>
+<body>
+    <!-- شريط التصفح العلوي -->
+    <div class="top-bar">
+        <div class="top-bar-content">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                المنصة التعليمية
+            </div>
+            <div class="nav-links">
+                <a href="#programs">آخر البرامج</a>
+                <a href="#features">المميزات</a>
+                <a href="#links">الروابط</a>
+                <a href="#ai">الذكاء الاصطناعي</a>
+                <a href="#contact">اتصل بنا</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- الهيدر الرئيسي -->
+        <header>
+            <h1>مرحباً بكم في منصتنا التعليمية المتطورة</h1>
+            <p class="subtitle">نحو مستقبل أفضل مع التعليم الإلكتروني المتميز، حيث نقدم أحدث البرامج والموارد التعليمية لتطوير مهاراتك ومعارفك في مختلف المجالات</p>
+            <a href="https://samalmukhtar.github.io/ala/#english-books" class="cta-button">ابدأ رحلة التعلم الآن</a>
+        </header>
+
+        <!-- شريط الأخبار -->
+        <div class="news-bar">
+            <div class="news-label">آخر الأخبار:</div>
+            <div class="news-container">
+                <div class="news-ticker">
+                    🚀 تم إضافة برامج جديدة هذا الأسبوع! • 📱 تطبيق الخاتم السليماني الجديد متاح الآن • 🎉 تحديثات على برامج الخاتم السليماني • 🌐 منتديات البرمجة بايثون متاحة الآن بميزات جديدة
+                </div>
+            </div>
+        </div>
+
+        <!-- آخر البرامج المضافة -->
+        <section class="programs-section" id="programs">
+            <div class="section-header">
+                <h2 class="section-title">آخر البرامج المضافة</h2>
+                <div class="controls">
+                    <button class="count-btn active" data-count="3">عرض 3 برامج</button>
+                    <button class="count-btn" data-count="4">عرض 4 برامج</button>
+                    <button class="count-btn" data-count="5">عرض 5 برامج</button>
+                </div>
+            </div>
+            
+            <div class="programs-container">
+                <!-- سيتم ملء البرامج هنا بواسطة الجافاسكريبت -->
+            </div>
+        </section>
+
+        <!-- إحصائيات الموقع -->
+        <div class="stats">
+            <div class="stat-item floating">
+                <span class="stat-number">5000+</span>
+                <div>طالب مسجل</div>
+            </div>
+            <div class="stat-item floating">
+                <span class="stat-number">200+</span>
+                <div>دورة تدريبية</div>
+            </div>
+            <div class="stat-item floating">
+                <span class="stat-number">50+</span>
+                <div>أستاذ متخصص</div>
+            </div>
+        </div>
+
+        <!-- الميزات الرئيسية -->
+        <div class="features" id="features">
+            <div class="feature-card">
+                <a href="https://samalmukhtar.github.io/ala/#english-books">
+                    <i class="fas fa-graduation-cap feature-icon"></i>
+                    <h3>برامج أكاديمية متميزة</h3>
+                    <p>نقدم مجموعة متنوعة من البرامج الأكاديمية المعتمدة في مختلف التخصصات العلمية والأدبية</p>
+                </a>
+            </div>
+            <div class="feature-card">
+                <a href="https://www.coursera.org/browse">
+                    <i class="fas fa-laptop feature-icon"></i>
+                    <h3>تعلم عن بعد</h3>
+                    <p>منصة تعليمية متكاملة تتيح لك التعلم من أي مكان وفي أي وقت تناسب جدولك اليومي</p>
+                </a>
+            </div>
+            <div class="feature-card">
+                <a href="https://www.edraak.org">
+                    <i class="fas fa-users feature-icon"></i>
+                    <h3>مجتمع تعليمي</h3>
+                    <p>تواصل مع زملائك والأساتذة في بيئة تعليمية تفاعلية لتبادل المعرفة والخبرات</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- قسم الروابط -->
+        <section class="links-section" id="links">
+            <div class="section-header">
+                <h2 class="section-title">روابط المدرسة الكبرى</h2>
+            </div>
+            
+            <div class="links-container">
+                <div class="links-grid">
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/slyym">إِنَّهُ من سليمان و إنه بِسْمِ اللَّهِ الرحمن الرحيم</a>
+                        <p>برنامج الخاتم السليماني الأساسي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/alhrooofe/">الكنزالعربي - علوم الحروف العربية</a>
+                        <p>دراسة متقدمة في علوم الحروف والأسرار</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/AB/">مدرسة علوم الحروف للطالب و المعلم</a>
+                        <p>منصة تعليمية متخصصة في علوم الحروف</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/toc/">تسجيل الصوت و تحويله لنص</a>
+                        <p>أداة متقدمة لتحويل الصوت إلى نص</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/k/">حساب الجمل</a>
+                        <p>برنامج متخصص في حساب الجمل العربي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/altoore/">توليد رسائل الطور</a>
+                        <p>أداة لتوليد الرسائل الروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/alqranalzaci/">النظام القرآني الذكي</a>
+                        <p>برنامج لتحليل النصوص القرآنية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/tah/">التحليل الإلهي</a>
+                        <p>أداة متقدمة للتحليل الروحاني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/th/">السبورة و تحليل الصور</a>
+                        <p>برنامج لتحليل الصور والرسومات</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/asamosa/">المحلل الروحاني المتطور</a>
+                        <p>برنامج متقدم للتحليل الروحاني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/qraa/">المحلل القرآني المتكامل</a>
+                        <p>برنامج شامل لتحليل النصوص القرآنية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.islamicbook.ws/amma/tfsir-alahlam-abn-sirin.html">المكتبة الشاملة</a>
+                        <p>مكتبة شاملة للكتب الإسلامية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://gtsxa.blogspot.com">المكتبة</a>
+                        <p>مكتبة رقمية للكتب والمراجع</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/AI/">المدونة</a>
+                        <p>مدونة متخصصة في الذكاء الاصطناعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ostoydyou/">استوديوا و مقهى المدرسة</a>
+                        <p>منصة للتعلم والتفاعل الاجتماعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/SL">تفسير الأحلام الروحاني</a>
+                        <p>برنامج متخصص في تفسير الأحلام</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/aS">ح الجُمّل والأسرار الروحانية</a>
+                        <p>برنامج لدراسة أسرار الحروف الروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/al">رسالة الحق ملك الكون</a>
+                        <p>برنامج للدراسات الروحانية المتقدمة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/alisybsare/">الإستبصار الإلاهي</a>
+                        <p>أداة للإستبصار والتحليل الروحاني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/nz">سر الحروف</a>
+                        <p>برنامج لدراسة أسرار الحروف العربية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ajbwawaba/">البوابة الإلهية الكونية</a>
+                        <p>بوابة للدراسات الكونية والروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/an100">محلل النصوص الشطرنجي المتقدم</a>
+                        <p>برنامج متقدم لتحليل النصوص</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ALR/">محلل الحروف النورانية و الظلمانية</a>
+                        <p>أداة لتحليل الحروف النورانية والظلمانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/alt/">المحلل المطور باحتساب نقلات فعلية</a>
+                        <p>برنامج متطور للتحليل الروحاني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://equran.me/listen-110.html">استماع القرآن الكريم</a>
+                        <p>منصة لاستماع القرآن الكريم</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://surahquran.com/">بحث في القرآن الكريم</a>
+                        <p>أداة متقدمة للبحث في القرآن الكريم</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ASMAA">المحلل الروحاني النهائي</a>
+                        <p>برنامج نهائي للتحليل الروحاني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/NON/">سر النون</a>
+                        <p>دراسة متخصصة في سر حرف النون</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/alh/">الحكم الروحانية</a>
+                        <p>مجموعة من الحكم والدراسات الروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/En/">تعلم الإنجليزية ترجمة و تسجيل</a>
+                        <p>منصة لتعلم اللغة الإنجليزية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.eslfast.com/begin1/">English Level</a>
+                        <p>مصادر لتعلم اللغة الإنجليزية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.hume.ai/?_gl=1*v1pebz*_ga*Njc3NjY5NzEwLjE3Mzg4ODc3NDk.*_ga_4R5GMSJXG1*MTc0MTM3NDIwNS4xNi4wLjE3NDEzNzQyMDUuMC4wLjA.">روبوتات التحدث</a>
+                        <p>أدوات للتفاعل مع روبوتات المحادثة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ksa">دورات أكاديمية في تعلم الإنجليزية و البرمجة</a>
+                        <p>دورات متخصصة في اللغة الإنجليزية والبرمجة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/1/" target="_blank">دليلك الأول لعالم الأسرار</a>
+                        <p>مدخل إلى عالم الأسرار الروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/2/" target="_blank">استكشاف أعمق للروحانية القرآنية</a>
+                        <p>دراسة متقدمة للروحانية في القرآن الكريم</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/3/" target="_blank">رحلة في عالم السر</a>
+                        <p>رحلة معرفية في عالم الأسرار</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/4/" target="_blank">إضاءات مبتكرة</a>
+                        <p>إضاءات في المعرفة والروحانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/5/" target="_blank">تفسير وتحليل للنص الكريم</a>
+                        <p>برنامج لتفسير وتحليل النصوص القرآنية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/6/" target="_blank">تأملات في الحسابات القرآنية</a>
+                        <p>دراسة في الحسابات القرآنية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/7/" target="_blank">كشف الغموض في الأسرار</a>
+                        <p>برنامج لكشف أسرار المعرفة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/8/" target="_blank">رمزية الخاتم في السياقات الدينية</a>
+                        <p>دراسة في رمزية الخاتم</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/9/" target="_blank">رؤية شاملة للكون والحياة</a>
+                        <p>دراسة في الكون وفلسفة الحياة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/10/" target="_blank">منهج روحي وفكري شامل</a>
+                        <p>منهج متكامل للروحانيات والفكر</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/11/" target="_blank">بحث في أعماق السر الإلهي</a>
+                        <p>دراسة متعمقة في الأسرار الإلهية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/Abc/" target="_blank"> علوم قرآنية و فلكية</a>
+                        <p>برنامج للعلوم القرآنية والفلكية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/c/" target="_blank"> علوم سرية</a>
+                        <p>دراسات في العلوم السرية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/h/" target="_blank"> علوم الفجر</a>
+                        <p>برنامج للعلوم الروحانية المتقدمة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/abr/" target="_blank"> الكلمات في الابراج</a>
+                        <p>دراسة العلاقة بين الكلمات والأبراج</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/f/" target="_blank"> مولد الرسائل القمرية المتقدم</a>
+                        <p>برنامج متقدم لتوليد الرسائل القمرية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/na/" target="_blank"> الحساب الرقمي</a>
+                        <p>أداة للحسابات الرقمية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/za/" target="_blank"> حساب النور</a>
+                        <p>برنامج للحسابات النورانية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ng/" target="_blank"> الراصد الفلكي الإسلامي</a>
+                        <p>أداة للرصد الفلكي الإسلامي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ZX/" target="_blank"> علم الفلك</a>
+                        <p>برنامج لدراسة علم الفلك</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/SF/" target="_blank"> منازل الحروف</a>
+                        <p>دراسة في منازل الحروف</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/mk/" target="_blank"> منازل الكلمات</a>
+                        <p>دراسة في منازل الكلمات</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/fs/" target="_blank"> منازل الحروف الجديد</a>
+                        <p>نسخة محدثة من برنامج منازل الحروف</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/lio/" target="_blank"> منازل الحروف و عناصرها</a>
+                        <p>دراسة منازل الحروف وعناصرها</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/SDFWE/" target="_blank"> لوحة الشطرنج 8/8 مع منازل القمر</a>
+                        <p>برنامج للشطرنج ومنازل القمر</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/-gj/" target="_blank"> لوحة المنازل القمرية مع الخاتم السليماني</a>
+                        <p>أداة متكاملة للخاتم السليماني والمنازل القمرية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/df/" target="_blank"> حساب البرج في الخاتم</a>
+                        <p>برنامج لحساب الأبراج في الخاتم السليماني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/fg/" target="_blank"> الغالب و المغلوب الخاتم</a>
+                        <p>دراسة في الغالب والمغلوب في الخاتم السليماني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/fd/" target="_blank"> المنازل القمرية مع الام بالخاتم السليماني</a>
+                        <p>برنامج متكامل للخاتم السليماني والمنازل القمرية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/GE/" target="_blank"> لوحة الشطرنج 8/8 بالخاتم و الخدام</a>
+                        <p>برنامج للشطرنج مع الخاتم السليماني</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/sr/" target="_blank"> لوحة الشطرنج 8/8 بالخاتم و السور</a>
+                        <p>برنامج للشطرنج مع الخاتم والسور</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/SJ/" target="_blank"> لوحة الشطرنج 8/8</a>
+                        <p>برنامج للشطرنج التقليدي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ew/" target="_blank"> اللوحة المتكاملة</a>
+                        <p>برنامج للشطرنج التقليدي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.mediafire.com/file/dnysccy5ezdbzbw/%25D8%25A7%25D9%2584%25D8%25AA%25D9%2582%25D8%25B1%25D9%258A%25D8%25B1_%25D8%25A7%25D9%2584%25D8%25A3%25D8%25B3%25D8%25A8%25D9%2588%25D8%25B9%25D9%258A.zip/file" target="_blank"> التقرير الأسبوعي</a>
+                        <p>تحميل التقرير الأسبوعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/als/" target="_blank"> التقرير الأسبوعي</a>
+                        <p>برنامج للتقرير الأسبوعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ald/" target="_blank"> طباعة التقرير الأسبوعي</a>
+                        <p>أداة لطباعة التقرير الأسبوعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/re/" target="_blank"> جدول تمارين أسابيع متعددة</a>
+                        <p>برنامج لجدولة التمارين الرياضية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/rt/" target="_blank"> الجدول الرياضي المخصص</a>
+                        <p>أداة لإنشاء جداول تمارين مخصصة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ro/" target="_blank"> الجدول الرياضي الاحترافي</a>
+                        <p>برنامج للتمارين الرياضية الاحترافية</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/rq/" target="_blank"> جدول تمارين المنزل مع Bar وDumbbell</a>
+                        <p>برنامج لتمارين المنزل</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/rp/" target="_blank"> مع الاقتراحات Bar وDumbbell</a>
+                        <p>أداة لتمارين Bar وDumbbell</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- دعوة للانضمام -->
+        <div class="invite-section">
+            <h2 class="invite-title">النادي الرياضي المتكامل</h2>
+            <p class="invite-text">انضم إلى نادينا الرياضي المتكامل حيث نقدم برامج تدريبية متخصصة، نصائح صحية، وجداول تمارين مخصصة لتحقيق أهدافك الرياضية</p>
+            <a class="invite-button" href="https://samalmukhtar.github.io/ry/" target="_blank">قم بزيارته الآن</a>
+        </div>
+
+        <div class="invite-section">
+            <h2 class="invite-title">منتديات البرمجة بايثون</h2>
+            <p class="invite-text">انضم إلى مجتمع مبرمجي بايثون لمناقشة المشاريع، حل المشاكل، وتبادل الخبرات في عالم البرمجة</p>
+            <a class="invite-button" href="https://samalmukhtar.github.io/Py/" target="_blank">قم بزيارته الآن</a>
+        </div>
+
+        <div class="invite-section">
+            <h2 class="invite-title">منصة الأجيال</h2>
+            <p class="invite-text">منصة تعليمية شاملة تقدم محتوى تعليمي متميز للأجيال القادمة</p>
+            <a class="invite-button" href="https://greatteacersam.blogspot.com/" target="_blank">قم بزيارتها الآن</a>
+        </div>
+
+        <div class="invite-section">
+            <h2 class="invite-title">اشترك في النادي العربي للشطرنج</h2>
+            <p class="invite-text">أول 10 مشتركين سيكونون مشرفين ويمكنهم الاستفادة من الميزات المدفوعة مجانًا!</p>
+            <a class="invite-button" href="https://chess.com/club/lndy-l-rby-llshtrnj-the-great-chess-club" target="_blank">اشترك الآن</a>
+        </div>
+
+        <!-- قسم الذكاء الاصطناعي -->
+        <section class="links-section" id="ai">
+            <div class="section-header">
+                <h2 class="section-title">منصات الذكاء الاصطناعي</h2>
+            </div>
+            
+            <div class="links-container">
+                <div class="links-grid">
+                    <div class="link-item">
+                        <a href="https://chat.openai.com">شات جي بي تي (ChatGPT)</a>
+                        <p>نموذج لغوي متقدم يعتمد على الذكاء الاصطناعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.deepseek.com">ديب سيك (DeepSeek)</a>
+                        <p>مساعد ذكاء اصطناعي متطور</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://gemini.google.com">جيميناي (Gemini)</a>
+                        <p>نموذج لغوي متقدم من جوجل</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://notebooklm.google/">NotebookLM</a>
+                        <p>مساعد ذكاء اصطناعي للمذاكرة</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.perplexity.ai">بيربل أيه آي (Perplexity AI)</a>
+                        <p>محرك بحث ذكي يعتمد على الذكاء الاصطناعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.anthropic.com">كلود (Claude)</a>
+                        <p>نموذج لغوي متقدم من Anthropic</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://www.aliyun.com">كوين شات (Qwen Chat)</a>
+                        <p>مساعد ذكاء اصطناعي من علي بابا</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/ain/">نشرة الذكاء الاصطناعي</a>
+                        <p>أدوات و معلومات متنوعة في الذكاء الاصطناعي</p>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://samalmukhtar.github.io/cbb/">أكثر من مئة موقع تثير الفضول</a>
+                        <p>مواقع عربية وعالمية لم تسمع عنها غالباً</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم الفيديوهات -->
+        <section class="video-section">
+            <div class="section-header">
+                <h2 class="section-title">فيديوهات تعليمية</h2>
+            </div>
+            
+            <div class="video-container">
+                <div class="video-card">
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/DDrQZH8Mwxs" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">مصير الشمس</h3>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/UeaXzIZL9kc?start=44" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">دورة الذكاء الاصطناعي</h3>
+                    </div>
+                </div>
+                
+                <div class="video-card">
+                    <div class="video-embed">
+                        <iframe src="https://www.youtube.com/embed/eVOBxvtcZnU?start=413" allowfullscreen></iframe>
+                    </div>
+                    <div class="video-info">
+                        <h3 class="video-title">سلسلة المعارف القديمة</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- قسم التحميل -->
+        <div class="download-section">
+            <div class="download-content">
+                <h2 class="invite-title">📲 حمّل تطبيقنا الآن واستمتع بتجربة فريدة!</h2>
+                <p class="invite-text">متاح على أنظمة أندرويد و iOS، لا تفوّت الفرصة!</p>
+                
+                <div class="download-buttons">
+                    <a href="https://median.co/share/ylyzqy" class="download-btn" target="_blank">
+                        <i class="fab fa-android"></i>
+                        <span>تحميل للأندرويد</span>
+                    </a>
+                    <a href="https://median.co/share/ylyzqy" class="download-btn" target="_blank">
+                        <i class="fab fa-apple"></i>
+                        <span>تحميل للآيفون</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- الفوتر -->
+    <footer id="contact">
+        <div class="footer-content">
+            <h3>تواصل معنا</h3>
+            <div class="footer-links">
+                <a href="mailto:contact@example.com"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
+                <a href="https://t.me/example"><i class="fab fa-telegram"></i> تليجرام</a>
+                <a href="https://wa.me/123456789"><i class="fab fa-whatsapp"></i> واتساب</a>
+            </div>
+            <p class="copyright">© 2023-2030 موقع البرامج والتطبيقات - جميع الحقوق محفوظة</p>
+        </div>
+    </footer>
+
+    <script>
+        // بيانات البرامج
+        const programsData = [
+            {
+                id: 1,
+                title: "الخاتم السليماني المتطور",
+                description: "برنامج شامل للخاتم السليماني يقدم أحدث الأدوات والوظائف للاستفادة من علوم الحروف والأسرار الروحانية.",
+                icon: "fas fa-ring",
+                link: "https://samalmukhtar.github.io/slyym"
+            },
+            {
+                id: 2,
+                title: "برامج الخاتم السليماني المتكاملة",
+                description: "مجموعة متكاملة من البرامج المتعلقة بالخاتم السليماني، تشمل تحليل النصوص، توليد الرسائل، وحساب الجمل.",
+                icon: "fas fa-cogs",
+                link: "https://samalmukhtar.github.io/alhrooofe/"
+            },
+            {
+                id: 3,
+                title: "المحلل الروحاني المتقدم",
+                description: "برنامج متطور لتحليل النصوص الروحانية وفك رموزها باستخدام علوم الحروف والأسرار الإلهية.",
+                icon: "fas fa-brain",
+                link: "https://samalmukhtar.github.io/asamosa/"
+            },
+            {
+                id: 4,
+                title: "منتديات البرمجة بايثون",
+                description: "مجتمع تفاععي لمبرمجي بايثون لمناقشة المشاريع، حل المشاكل، وتبادل الخبرات في عالم البرمجة.",
+                icon: "fab fa-python",
+                link: "https://samalmukhtar.github.io/Py/"
+            },
+            {
+                id: 5,
+                title: "البرنامج المتكامل للعلوم القرآنية",
+                description: "منصة شاملة لدراسة العلوم القرآنية والفلكية مع أدوات متقدمة للبحث والتحليل في النص القرآني.",
+                icon: "fas fa-book-quran",
+                link: "https://samalmukhtar.github.io/Abc/"
+            }
+        ];
+        
+        // عناصر DOM
+        const programsContainer = document.querySelector('.programs-container');
+        const countButtons = document.querySelectorAll('.count-btn');
+        
+        // عرض البرامج
+        function displayPrograms(count) {
+            // مسح المحتوى الحالي
+            programsContainer.innerHTML = '';
+            
+            // فرز البرامج من الأحدث إلى الأقدم
+            const sortedPrograms = [...programsData].sort((a, b) => b.id - a.id);
+            
+            // عرض العدد المطلوب من البرامج
+            const programsToShow = sortedPrograms.slice(0, count);
+            
+            // تدرجات ألوان مختلفة لكل بطاقة
+            const gradients = [
+                'linear-gradient(135deg, #43cea2, #185a9d)',
+                'linear-gradient(135deg, #ff7e5f, #feb47b)',
+                'linear-gradient(135deg, #654ea3, #eaafc8)',
+                'linear-gradient(135deg, #1d976c, #93f9b9)',
+                'linear-gradient(135deg, #ff5e62, #ff9966)'
+            ];
+            
+            programsToShow.forEach((program, index) => {
+                const programCard = document.createElement('div');
+                programCard.className = 'program-card';
+                
+                programCard.innerHTML = `
+                    <div class="program-badge">جديد</div>
+                    <div class="program-image" style="background: ${gradients[index % gradients.length]}">
+                        <i class="${program.icon}"></i>
+                    </div>
+                    <div class="program-content">
+                        <h3 class="program-title">${program.title}</h3>
+                        <p class="program-description">${program.description}</p>
+                        <a href="${program.link}" class="program-link">عرض البرنامج والتحميل</a>
+                    </div>
+                `;
+                
+                programsContainer.appendChild(programCard);
+            });
+        }
+        
+        // تفعيل زر التحديد
+        function activateButton(button) {
+            countButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        }
+        
+        // معالجة أحداث الأزرار
+        countButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const count = parseInt(button.getAttribute('data-count'));
+                activateButton(button);
+                displayPrograms(count);
+            });
+        });
+        
+        // التهيئة الأولية
+        displayPrograms(3);
+        
+        // تأثيرات متحركة للبطاقات عند التمرير
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.program-card');
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                if (cardTop < window.innerHeight - 100) {
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
